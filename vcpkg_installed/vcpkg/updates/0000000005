@@ -1,8 +1,0 @@
-Package: gtest
-Version: 1.14.0
-Depends: vcpkg-cmake, vcpkg-cmake-config
-Architecture: x64-windows
-Multi-Arch: same
-Abi: 0c2cc172f7f30a9b6e5871a401543c305d47994ac1af2ee7c3c59e77842cada5
-Description: GoogleTest and GoogleMock testing frameworks
-Status: install ok installed
