@@ -12,6 +12,7 @@ include_directories("src")
 file(GLOB LIBRARY_FILES src/lib.h src/lib.cpp src/day*/solution*.cpp src/day*/solution*.h)
 add_library(solutions ${LIBRARY_FILES})
 
+# FIXME: generate this?
 add_executable(day1 src/day1/main.cpp)
 target_link_libraries(day1 solutions)
 
@@ -24,8 +25,14 @@ target_link_libraries(day1_test ${GTEST_BOTH_LIBRARIES})
 target_link_libraries(day1_test solutions)
 add_test(Tests day1_test)
 
+add_executable(day2_test "src/day2/test.cpp")
+target_link_libraries(day2_test ${GTEST_BOTH_LIBRARIES})
+target_link_libraries(day2_test solutions)
+add_test(Tests day2_test)
+
 if (CMAKE_VERSION VERSION_GREATER 3.12)
     set_property(TARGET solutions PROPERTY CXX_STANDARD 20)
-    set_property(TARGET day1_test PROPERTY CXX_STANDARD 20)
     set_property(TARGET day1 PROPERTY CXX_STANDARD 20)
+    set_property(TARGET day1_test PROPERTY CXX_STANDARD 20)
+    set_property(TARGET day2_test PROPERTY CXX_STANDARD 20)
 endif()

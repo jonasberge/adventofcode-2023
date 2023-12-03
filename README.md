@@ -22,3 +22,10 @@ https://adventofcode.com/2023
 - Wrote tests with GTest for all meaningful use cases, examples and solutions
 - Refactored everything to have a better structure for future solutions
 - Standard library features used: regular expressions, string streams
+
+### Day 2
+
+- Separate writing solutions into three steps:
+	1. Reading lines from input files
+	2. Parsing/Converting lines to meaningful data structure instances
+	3. Using the well-formed data with the solving algorithm
