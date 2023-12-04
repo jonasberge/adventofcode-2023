@@ -29,3 +29,9 @@ https://adventofcode.com/2023
 	1. Reading lines from input files
 	2. Parsing/Converting lines to meaningful data structure instances
 	3. Using the well-formed data with the solving algorithm
+
+### Day 3
+
+- Found these idioms for operator overloading: https://stackoverflow.com/q/4421706
+- Learned about the spaceship operator and "default" comparison operator implementations,
+  which reduces the boilerplate of merely comparing all attributes
