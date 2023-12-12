@@ -45,6 +45,11 @@ target_link_libraries(day5_test GTest::gmock_main)
 target_link_libraries(day5_test solutions)
 add_test(Day5Tests day5_test)
 
+add_executable(day6_test "src/day6/test.cpp")
+target_link_libraries(day6_test GTest::gmock_main)
+target_link_libraries(day6_test solutions)
+add_test(Day5Tests day6_test)
+
 if (CMAKE_VERSION VERSION_GREATER 3.12)
     set_property(TARGET solutions PROPERTY CXX_STANDARD 20)
     set_property(TARGET day1 PROPERTY CXX_STANDARD 20)
@@ -53,6 +58,7 @@ if (CMAKE_VERSION VERSION_GREATER 3.12)
     set_property(TARGET day3_test PROPERTY CXX_STANDARD 20)
     set_property(TARGET day4_test PROPERTY CXX_STANDARD 20)
     set_property(TARGET day5_test PROPERTY CXX_STANDARD 20)
+    set_property(TARGET day6_test PROPERTY CXX_STANDARD 20)
 endif()
 
 # https://stackoverflow.com/questions/14306642/adding-multiple-executables-in-cmake
