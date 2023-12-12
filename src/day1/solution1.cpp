@@ -11,6 +11,8 @@
 #include "solution1.h"
 #include "solution1.h"
 #include "solution1.h"
+#include "solution1.h"
+#include "solution1.h"
 
 using namespace day1;
 
