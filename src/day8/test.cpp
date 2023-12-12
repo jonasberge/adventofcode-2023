@@ -35,9 +35,22 @@ namespace day8
 		Input input{ .map = parse_lines(lines) };
 		EXPECT_EQ(6, input.solve());
 	}
+	TEST(Solution, Example3Part2) {
+		auto lines = read_lines("./src/day8/input/example3.txt");
+		Input input{ .map = parse_lines(lines) };
+		EXPECT_EQ(6, input.solve_ghosts_naive());
+		EXPECT_EQ(6, input.solve_ghosts());
+	}
 	TEST(Solution, Input) {
 		auto lines = read_lines("./src/day8/input/input.txt");
 		Input input{ .map = parse_lines(lines) };
 		EXPECT_EQ(19783, input.solve());
+	}
+	TEST(Solution, InputPart2) {
+		auto lines = read_lines("./src/day8/input/input.txt");
+		Input input{ .map = parse_lines(lines) };
+		// not 1998747435 (too low) -> int overflow
+		// calculated manually: 9177460370549
+		EXPECT_EQ(9177460370549, input.solve_ghosts());
 	}
 }

@@ -28,6 +28,10 @@ namespace day8::solution1
 
 		// functions that give solutions or solve parts
 		size_t solve();
+
+		// part 2
+		size_t solve_ghosts_naive();
+		size_t solve_ghosts();
 	};
 
 	// input parsing functions
