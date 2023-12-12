@@ -23,7 +23,10 @@ namespace day7::solution1
 		Four = 4,
 		Three = 3,
 		Two = 2,
-		Invalid = 0
+		Joker = 1,
+		HighestCard = Ace,
+		LowestCard = Joker,
+		InvalidCard = 0
 	};
 
 	enum HandType
@@ -34,7 +37,8 @@ namespace day7::solution1
 		ThreeOfAKind = 4,
 		TwoPair = 3,
 		OnePair = 2,
-		HighCard = 1
+		HighCard = 1,
+		InvalidHandType = 0
 	};
 
 	struct Hand
@@ -67,6 +71,9 @@ namespace day7::solution1
 	{
 		// parsed input data
 		std::vector<Bid> bids;
+
+		// prepare for part 2
+		void apply_jokers();
 
 		// functions that give solutions or solve parts
 		size_t solve();

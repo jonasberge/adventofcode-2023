@@ -39,14 +39,43 @@ namespace day7
 		EXPECT_GT(parse_hand("33332"), parse_hand("2AAAA"));
 		EXPECT_GT(parse_hand("77888"), parse_hand("77788"));
 	}
+	TEST(Hand, Jokers) {
+		EXPECT_EQ(HandType::FiveOfAKind, parse_hand("AAAA?").hand_type());
+		EXPECT_EQ(HandType::FiveOfAKind, parse_hand("AAA??").hand_type());
+		EXPECT_EQ(HandType::FiveOfAKind, parse_hand("AA???").hand_type());
+		EXPECT_EQ(HandType::FiveOfAKind, parse_hand("A????").hand_type());
+		// from example 1
+		// from ordering
+		EXPECT_EQ(HandType::FourOfAKind, parse_hand("???28").hand_type());
+		EXPECT_EQ(HandType::ThreeOfAKind, parse_hand("??T56").hand_type());
+	}
+	TEST(HAND, JokerOrdering) {
+		EXPECT_GT(parse_hand("???28"), parse_hand("??T56"));
+	}
+	TEST(Hand, AllJokers) {
+		EXPECT_EQ(HandType::FiveOfAKind, parse_hand("?????").hand_type());
+	}
 	TEST(Solution, Example1) {
 		auto lines = read_lines("./src/day7/input/example1.txt");
 		Input input{ .bids = parse_lines(lines) };
 		EXPECT_EQ(6440, input.solve());
 	}
+	TEST(Solution, Example1Part2) {
+		auto lines = read_lines("./src/day7/input/example1.txt");
+		Input input{ .bids = parse_lines(lines) };
+		input.apply_jokers();
+		EXPECT_EQ(5905, input.solve());
+	}
 	TEST(Solution, Input) {
 		auto lines = read_lines("./src/day7/input/input.txt");
 		Input input{ .bids = parse_lines(lines) };
 		EXPECT_EQ(246409899, input.solve());
+	}
+	TEST(Solution, InputPart2) {
+		auto lines = read_lines("./src/day7/input/input.txt");
+		Input input{ .bids = parse_lines(lines) };
+		input.apply_jokers();
+		auto hand_type = input.bids[93].hand.hand_type();
+		EXPECT_EQ(244848487, input.solve());
 	}
 }
