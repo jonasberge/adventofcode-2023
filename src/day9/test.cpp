@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <chrono>
+#include <iostream>
 
 #include "solution1.h"
 #include "lib.h"
@@ -64,11 +66,18 @@ namespace day9
 		auto lines = read_lines("./src/day9/input/input.txt");
 		auto sequences = parse_lines(lines);
 		Input input{ .sequences = sequences };
-		EXPECT_EQ(1887980197, input.solve());
+
+		auto start = std::chrono::high_resolution_clock::now();
+		int_t s1 = input.solve();
+		auto stop = std::chrono::high_resolution_clock::now();
+		auto duration = duration_cast<std::chrono::microseconds>(stop - start);
+		std::cout << duration.count() << "us" << std::endl;
+
+		EXPECT_EQ(1887980197, s1);
 		// not -990
 		// it's 990?
-		int_t solution = input.solve_backwards();
-		solution *= -1; // this seems to be necessary?
-		EXPECT_EQ(990, solution);
+		int_t s2 = input.solve_backwards();
+		s2 *= -1; // this seems to be necessary?
+		EXPECT_EQ(990, s2);
 	}
 }
