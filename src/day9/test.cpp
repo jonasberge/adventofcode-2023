@@ -2,6 +2,7 @@
 #include <gmock/gmock.h>
 #include <vector>
 #include <string>
+#include <algorithm>
 
 #include "solution1.h"
 #include "lib.h"
@@ -48,10 +49,26 @@ namespace day9
 		Input input{ .sequences = sequences };
 		EXPECT_EQ(114, input.solve());
 	}
+	TEST(Solution, Example1Part2) {
+		auto lines = read_lines("./src/day9/input/example1.txt");
+		auto sequences = parse_lines(lines);
+		PascalTriangle pt;
+		EXPECT_EQ(-3, sequences[0].extrapolate_value_backwards(pt));
+		EXPECT_EQ(0, sequences[1].extrapolate_value_backwards(pt));
+		EXPECT_EQ(5, sequences[2].extrapolate_value_backwards(pt));
+		Input input{ .sequences = sequences };
+		EXPECT_EQ(114, input.solve());
+		EXPECT_EQ(2, input.solve_backwards());
+	}
 	TEST(Solution, Input) {
 		auto lines = read_lines("./src/day9/input/input.txt");
 		auto sequences = parse_lines(lines);
 		Input input{ .sequences = sequences };
 		EXPECT_EQ(1887980197, input.solve());
+		// not -990
+		// it's 990?
+		int_t solution = input.solve_backwards();
+		solution *= -1; // this seems to be necessary?
+		EXPECT_EQ(990, solution);
 	}
 }

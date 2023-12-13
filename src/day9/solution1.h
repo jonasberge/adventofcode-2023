@@ -22,6 +22,7 @@ namespace day9::solution1
 		std::vector<int_t> values;
 
 		int_t extrapolate_value(PascalTriangle& pascal_triangle) const;
+		int_t extrapolate_value_backwards(PascalTriangle& pascal_triangle) const;
 	};
 
 	struct Input
@@ -31,6 +32,7 @@ namespace day9::solution1
 
 		// functions that give solutions or solve parts
 		int_t solve();
+		int_t solve_backwards();
 	};
 
 	// input parsing functions

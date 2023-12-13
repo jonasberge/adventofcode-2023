@@ -110,12 +110,63 @@ int_t day9::solution1::Sequence::extrapolate_value(PascalTriangle& pascal_triang
 	return sum;
 }
 
+int_t day9::solution1::Sequence::extrapolate_value_backwards(PascalTriangle& pascal_triangle) const
+{
+	// part 2
+	// 0. reverse each sequence:
+	/*	 a	 b	 c	 d	 e	 f	 g
+	1:	45	30	21	16	13	10	 5
+	2:	15	 9	 5	 3	 3	 5
+	3:	 6	 4	 2	 0	-2
+	4:	 2	 2	 2	 2
+	5:	 0	 0	 0
+
+	row 4:
+	- a4 = a3-b3 = (a2-b2)-(b2-c2) = a2-2*b2+c2 = (a-b)-2*(b-c)+(c-d)
+	- a4 = a-3b+3c-d
+	=> 1. the letters are not reversed anymore
+	- c5 = c-4d+6e-4f+g
+	- <=> g = -c+4d-6e+4f
+	=> 2. do not skip the first pascal triangle value
+	=> 3. reverse the sign (negative)
+	*/
+
+	// values must be reversed (0)
+	std::vector<int_t> reversed(values);
+	std::reverse(reversed.begin(), reversed.end());
+
+	size_t n = reversed.size();
+	// row n has n+1 values, which is what we need
+	std::vector<size_t> pt_row = pascal_triangle.get_row(n);
+	int_t sign = -1; // start with negative sign (3)
+	int_t sum = 0;
+	// do not skip the first pascal triangle value (2)
+	for (size_t i = 0; i < pt_row.size() - 1; i++) {
+		size_t k = i; // index into sequence values, not reversed (1)
+		size_t pt_value = pt_row[i];
+		sum += reversed[k] * pt_value * sign;
+		sign = -sign; // flip sign
+	}
+
+	return sum;
+}
+
 int_t day9::solution1::Input::solve()
 {
 	int_t sum = 0;
 	PascalTriangle pt;
 	for (Sequence const& sequence : sequences) {
 		sum += sequence.extrapolate_value(pt);
+	}
+	return sum;
+}
+
+int_t day9::solution1::Input::solve_backwards()
+{
+	int_t sum = 0;
+	PascalTriangle pt;
+	for (Sequence const& sequence : sequences) {
+		sum += sequence.extrapolate_value_backwards(pt);
 	}
 	return sum;
 }
