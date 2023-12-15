@@ -74,10 +74,6 @@ namespace day9
 		std::cout << duration.count() << "us" << std::endl;
 
 		EXPECT_EQ(1887980197, s1);
-		// not -990
-		// it's 990?
-		int_t s2 = input.solve_backwards();
-		s2 *= -1; // this seems to be necessary?
-		EXPECT_EQ(990, s2);
+		EXPECT_EQ(990, input.solve_backwards());
 	}
 }

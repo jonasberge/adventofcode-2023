@@ -129,6 +129,9 @@ int_t day9::solution1::Sequence::extrapolate_value_backwards(PascalTriangle& pas
 	- <=> g = -c+4d-6e+4f
 	=> 2. do not skip the first pascal triangle value
 	=> 3. reverse the sign (negative)
+	- also: the value we are looking for is at the end of the sum here.
+	  it is added when the number of values is even and subtracted if it is odd.
+	  thus the sign of the solution needs to be flipped, if the number of values is odd.
 	*/
 
 	// values must be reversed (0)
@@ -146,6 +149,11 @@ int_t day9::solution1::Sequence::extrapolate_value_backwards(PascalTriangle& pas
 		size_t pt_value = pt_row[i];
 		sum += reversed[k] * pt_value * sign;
 		sign = -sign; // flip sign
+	}
+
+	// reverse the sign if the number of values is odd.
+	if (n % 2 == 1) {
+		sum = -sum;
 	}
 
 	return sum;
