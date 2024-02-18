@@ -112,6 +112,7 @@ namespace day10::solution1
 		Field parse_grid();
 
 		size_t solve();
+		size_t solve_part2();
 	};
 
 	// input parsing functions

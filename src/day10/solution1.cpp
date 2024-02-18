@@ -236,3 +236,134 @@ size_t day10::solution1::Input::solve()
 
 	return step_count - 1;
 }
+
+static Direction turn_direction(Direction d, bool isRight)
+{
+	Direction d2 = Direction::None;
+	if (isRight) {
+		switch (d) {
+		case Direction::North: d2 = Direction::East; break;
+		case Direction::East: d2 = Direction::South; break;
+		case Direction::South: d2 = Direction::West; break;
+		case Direction::West: d2 = Direction::North; break;
+		}
+	}
+	else {
+		switch (d) {
+		case Direction::North: d2 = Direction::West; break;
+		case Direction::West: d2 = Direction::South; break;
+		case Direction::South: d2 = Direction::East; break;
+		case Direction::East: d2 = Direction::North; break;
+		}
+	}
+	return d2;
+}
+
+size_t day10::solution1::Input::solve_part2()
+{
+	static const size_t index = 0;
+	int turns = 0;
+
+	// find out which side of the direction at index 0 is the "inside" of the loop.
+	// we will place our "inside" markers on that side.
+	// if "turns" is positive, then the "inside" is on the right,
+	// otherwise it's on the left of the pipe.
+	Field field = parse_grid();
+	field.iterate_single_direction(index,
+		[&turns](const Vector& v, Direction d, Turn t) {
+			switch (t) {
+			case Turn::RightTurn: turns++; break;
+			case Turn::LeftTurn: turns--; break;
+			}
+		});
+
+	std::vector<std::vector<bool>> enclosed(field.height, std::vector<bool>(field.width, false));
+
+	// mark initial spots that are on the inside of the loop.
+	// these aren't all spots, since some areas can be large and need to be filled out.
+	field.iterate_single_direction(index,
+		[&field, &turns, &enclosed](const Vector& v, Direction d, Turn t) {
+			Direction nd = turn_direction(d, turns >= 0);
+			Vector n1 = v.plus(Vector::for_direction(nd));
+			if (n1.x >= 0 && n1.x < field.width && n1.y >= 0 && n1.y < field.height) {
+				enclosed[n1.y][n1.x] = true;
+			}
+			if (t != Turn::None) {
+				// we want to find out the direction we are coming from, so it's a left turn.
+				Direction od = turn_direction(d, t != Turn::RightTurn);
+				// then take the proper neighbour of that as well and add it.
+				Direction nd2 = turn_direction(od, turns >= 0);
+				Vector n2 = v.plus(Vector::for_direction(nd2));
+				if (n2.x >= 0 && n2.x < field.width && n2.y >= 0 && n2.y < field.height) {
+					enclosed[n2.y][n2.x] = true;
+				}
+			}
+		});
+
+	std::vector<std::vector<bool>> visited(field.height, std::vector<bool>(field.width, false));
+
+	field.iterate_single_direction(index,
+		[&visited, &enclosed](const Vector& v, Direction d, Turn t) {
+			// make sure visited pipes/spots are not considered "inside" the loop.
+			enclosed[v.y][v.x] = false;
+			visited[v.y][v.x] = true;
+		});
+
+	// now expand/spread out each "inside" marker.
+	std::vector<Vector> coords;
+	for (size_t y = 0; y < field.height; y++) {
+		for (size_t x = 0; x < field.width; x++) {
+			if (enclosed[y][x]) {
+				coords.push_back(Vector(x, y));
+			}
+		}
+	}
+	while (coords.size() > 0) {
+		auto& v = coords.back();
+		coords.pop_back();
+
+		enclosed[v.y][v.x] = true;
+
+		for (int j = -1; j <= 1; j++) {
+			for (int i = -1; i <= 1; i++) {
+				if ((i == 0 || j == 0) && !(i == 0 && j == 0)) {
+					size_t y = v.y + j;
+					size_t x = v.x + i;
+					if (!visited[y][x] && !enclosed[y][x]) {
+						coords.push_back(Vector(x, y));
+					}
+				}
+			}
+		}
+	}
+
+	// output
+	for (size_t y = 0; y < field.height; y++) {
+		for (size_t x = 0; x < field.width; x++) {
+			if (enclosed[y][x]) {
+				std::cout << 'I';
+			}
+			else if (visited[y][x]) {
+				std::cout << '.';
+			}
+			else {
+				std::cout << ' ';
+			}
+		}
+		std::cout << std::endl;
+	}
+	std::cout << std::flush;
+	// output end
+
+	// count how many spots are inside the loop.
+	size_t count = 0;
+	for (size_t y = 0; y < field.height; y++) {
+		for (size_t x = 0; x < field.width; x++) {
+			if (enclosed[y][x]) {
+				count++;
+			}
+		}
+	}
+
+	return count;
+}
