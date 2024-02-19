@@ -4,9 +4,7 @@
 #include <utility>
 #include <algorithm>
 #include <cmath>
-// testing
-#include <gtest/gtest.h>
-#include <gmock/gmock.h>
+#include <set>
 // local
 #include "lib.h"
 
@@ -25,7 +23,7 @@ struct Image
 	bool empty_rows_cols_invalid = false;
 
 	// expands the galaxy, by "duplicating" empty rows and columns.
-	void expand();
+	void expand(size_t amount);
 };
 
 Image parse_input(const std::string& input)
@@ -68,11 +66,14 @@ Image parse_input(const std::string& input)
 	return result_image;
 }
 
-void Image::expand()
+void Image::expand(size_t to_amount = 2)
 {
 	if (empty_rows_cols_invalid)
 		throw "not implemented: cannot expand more than once";
 
+	// off by 1 error haunted me for hours.
+	// if we expand to a width of 10, we expand by 9. very important difference!
+	size_t by_amount = to_amount - 1;
 	std::vector<Point> result;
 
 	// cols
@@ -86,7 +87,7 @@ void Image::expand()
 		size_t x = galaxy.first;
 		size_t y = galaxy.second;
 		while (it != empty_columns.end() && *it < x) {
-			x_offset++;
+			x_offset += by_amount;
 			it++;
 		}
 		result.push_back(std::make_pair(x + x_offset, y));
@@ -106,7 +107,7 @@ void Image::expand()
 		size_t x = galaxy.first;
 		size_t y = galaxy.second;
 		while (it != empty_rows.end() && *it < y) {
-			y_offset++;
+			y_offset += by_amount;
 			it++;
 		}
 		result.push_back(std::make_pair(x, y + y_offset));
@@ -144,9 +145,9 @@ size_t taxicab_distance(Point const& p1, Point const& p2)
 }
 
 // calculates the sum of taxicab distances between all galaxies
-size_t solve(Image& image)
+size_t solve(Image& image, size_t expansion_amount)
 {
-	image.expand();
+	image.expand(expansion_amount);
 
 	size_t sum = 0;
 	combinations(image.galaxies,
@@ -156,6 +157,10 @@ size_t solve(Image& image)
 
 	return sum;
 }
+
+// testing
+#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 
 namespace Tests
 {
@@ -168,10 +173,10 @@ namespace Tests
 		return image;
 	}
 
-	size_t get_solution(std::string const& filename)
+	size_t get_solution(std::string const& filename, size_t expansion_amount)
 	{
 		Image image = get_image(filename);
-		return solve(image);
+		return solve(image, expansion_amount);
 	}
 
 	TEST(ParseInput, Parses) {
@@ -185,13 +190,23 @@ namespace Tests
 		ASSERT_THAT(image.empty_columns, UnorderedElementsAre(1, 2, 4, 5, 6, 8, 9));
 	}
 
-	TEST(ExpandGalaxy, Expands) {
+	TEST(ExpandGalaxy, ExpandsBy1) {
 		auto image = get_image("t1");
 		image.expand();
 		ASSERT_THAT(image.galaxies, UnorderedElementsAre(
 			Pair(5, 0),
 			Pair(12, 1),
 			Pair(0, 4)
+		));
+	}
+
+	TEST(ExpandGalaxy, ExpandsBy10) {
+		auto image = get_image("t1");
+		image.expand(10);
+		ASSERT_THAT(image.galaxies, UnorderedElementsAre(
+			Pair(23, 0),
+			Pair(57, 1),
+			Pair(0, 13)
 		));
 	}
 
@@ -208,9 +223,31 @@ namespace Tests
 		));
 	}
 
+	TEST(Combinations, FourElements) {
+		std::vector<size_t> elements = { 1, 2, 3, 4 };
+		std::vector<std::pair<size_t, size_t>> result;
+		combinations(elements, [&](size_t a, size_t b) {
+			result.push_back(std::make_pair(a, b));
+		});
+		ASSERT_THAT(result, UnorderedElementsAre(
+			Pair(1, 2),
+			Pair(1, 3),
+			Pair(1, 4),
+			Pair(2, 3),
+			Pair(2, 4),
+			Pair(3, 4)
+		));
+	}
+
 	TEST(Solve, Part1) {
-		ASSERT_EQ(32, get_solution("t1"));
-		ASSERT_EQ(374, get_solution("p1e1"));
-		ASSERT_EQ(10276166, get_solution("in"));
+		EXPECT_EQ(32, get_solution("t1", 2));
+		EXPECT_EQ(374, get_solution("p1e1", 2));
+		EXPECT_EQ(10276166, get_solution("in", 2));
+	}
+
+	TEST(Solve, Part2) {
+		EXPECT_EQ(1030, get_solution("p1e1", 10));
+		EXPECT_EQ(8410, get_solution("p1e1", 100));
+		EXPECT_EQ(598693078798, get_solution("in", 1000000));
 	}
 }

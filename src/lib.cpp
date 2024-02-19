@@ -9,7 +9,7 @@
 
 std::string read_file(std::string const& filename)
 {
-	std::cout << std::filesystem::current_path() << std::endl;
+	// std::cout << std::filesystem::current_path() << std::endl;
 	std::ifstream ifs(filename);
 	std::stringstream buffer;
 	buffer << ifs.rdbuf();
