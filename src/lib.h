@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 
+std::string read_file(std::string const& filename);
 std::vector<std::string> read_lines(std::string const& filename);
 
 // https://en.cppreference.com/w/cpp/utility/unreachable
