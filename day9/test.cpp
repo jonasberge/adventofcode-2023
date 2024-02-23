@@ -22,7 +22,7 @@ namespace day9
 		EXPECT_THAT(result[1].values, ElementsAre(1, 2, 3));
 	}
 	TEST(ParseLines, InputLongestLine) {
-		auto lines = read_lines("./src/day9/input/input.txt");
+		auto lines = read_lines("./day9/input/input.txt");
 		auto sequences = parse_lines(lines);
 		size_t maxlen = 0;
 		for (solution1::Sequence const& sequence : sequences) {
@@ -42,7 +42,7 @@ namespace day9
 	}
 
 	TEST(Solution, Example1) {
-		auto lines = read_lines("./src/day9/input/example1.txt");
+		auto lines = read_lines("./day9/input/example1.txt");
 		auto sequences = parse_lines(lines);
 		PascalTriangle pt;
 		EXPECT_EQ(18, sequences[0].extrapolate_value(pt));
@@ -52,7 +52,7 @@ namespace day9
 		EXPECT_EQ(114, input.solve());
 	}
 	TEST(Solution, Example1Part2) {
-		auto lines = read_lines("./src/day9/input/example1.txt");
+		auto lines = read_lines("./day9/input/example1.txt");
 		auto sequences = parse_lines(lines);
 		PascalTriangle pt;
 		EXPECT_EQ(-3, sequences[0].extrapolate_value_backwards(pt));
@@ -63,7 +63,7 @@ namespace day9
 		EXPECT_EQ(2, input.solve_backwards());
 	}
 	TEST(Solution, Input) {
-		auto lines = read_lines("./src/day9/input/input.txt");
+		auto lines = read_lines("./day9/input/input.txt");
 		auto sequences = parse_lines(lines);
 		Input input{ .sequences = sequences };
 

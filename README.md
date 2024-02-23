@@ -52,5 +52,5 @@ Seeds 10-19 and mapping 10-15 -> 50-55 results in two ranges
 It only makes sense to add the range 16-19 to the set of resulting ranges,
 in contradiction though, NOT adding them got me the right solution!
 
-To be sure that something was wrong I wrote a test around [example 2](./src/day5/input/example2.txt),
+To be sure that something was wrong I wrote a test around [example 2](./day5/input/example2.txt),
 (`day5::InputTests/Solution2_Example2`) which confirmed my suspicion.

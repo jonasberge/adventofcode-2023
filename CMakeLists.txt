@@ -7,75 +7,78 @@ if (POLICY CMP0141)
 endif()
 
 project("adventofcode-2023")
-include_directories("src")
+include_directories("lib")
 
-file(GLOB LIBRARY_FILES src/lib.h src/lib.cpp src/day*/solution*.cpp src/day*/solution*.h)
+file(GLOB LIBRARY_FILES lib/lib.h lib/lib.cpp day*/solution*.cpp day*/solution*.h)
 add_library(solutions ${LIBRARY_FILES})
+add_library(lib lib/lib.h lib/lib.cpp)
 
 # FIXME: generate this?
-add_executable(day1 src/day1/main.cpp)
+add_executable(day1 day1/main.cpp)
 target_link_libraries(day1 solutions)
 
 enable_testing()
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
-add_executable(day1_test "src/day1/test.cpp")
+add_executable(day1_test "day1/test.cpp")
 target_link_libraries(day1_test GTest::gmock_main)
 target_link_libraries(day1_test solutions)
 add_test(Day1Tests day1_test)
 
-add_executable(day2_test "src/day2/test.cpp")
+add_executable(day2_test "day2/test.cpp")
 target_link_libraries(day2_test GTest::gmock_main)
 target_link_libraries(day2_test solutions)
 add_test(Day2Tests day2_test)
 
-add_executable(day3_test "src/day3/test.cpp")
+add_executable(day3_test "day3/test.cpp")
 target_link_libraries(day3_test GTest::gmock_main)
 target_link_libraries(day3_test solutions)
 add_test(Day3Tests day3_test)
 
-add_executable(day4_test "src/day4/test.cpp")
+add_executable(day4_test "day4/test.cpp")
 target_link_libraries(day4_test GTest::gmock_main)
 target_link_libraries(day4_test solutions)
 add_test(Day4Tests day4_test)
 
-add_executable(day5_test "src/day5/test.cpp")
+add_executable(day5_test "day5/test.cpp")
 target_link_libraries(day5_test GTest::gmock_main)
 target_link_libraries(day5_test solutions)
 add_test(Day5Tests day5_test)
 
-add_executable(day6_test "src/day6/test.cpp")
+add_executable(day6_test "day6/test.cpp")
 target_link_libraries(day6_test GTest::gmock_main)
 target_link_libraries(day6_test solutions)
 add_test(Day6Tests day6_test)
 
-add_executable(day7_test "src/day7/test.cpp")
+add_executable(day7_test "day7/test.cpp")
 target_link_libraries(day7_test GTest::gmock_main)
 target_link_libraries(day7_test solutions)
 add_test(Day7Tests day7_test)
 
-add_executable(day8_test "src/day8/test.cpp")
+add_executable(day8_test "day8/test.cpp")
 target_link_libraries(day8_test GTest::gmock_main)
 target_link_libraries(day8_test solutions)
 add_test(Day8Tests day8_test)
 
-add_executable(day9_test "src/day9/test.cpp")
+add_executable(day9_test "day9/test.cpp")
 target_link_libraries(day9_test GTest::gmock_main)
 target_link_libraries(day9_test solutions)
 add_test(Day9Tests day9_test)
 
-add_executable(day10_test "src/day10/test.cpp")
+add_executable(day10_test "day10/test.cpp")
 target_link_libraries(day10_test GTest::gmock_main)
 target_link_libraries(day10_test solutions)
 add_test(Day10Tests day10_test)
 
-add_executable(day11 "src/day11/solve.cpp" src/lib.h src/lib.cpp)
+add_executable(day11 "day11/solve.cpp")
 target_link_libraries(day11 GTest::gmock_main)
+target_link_libraries(day11 lib)
 add_test(Day11 day11)
 
-add_executable(day12 "src/day12/solve.cpp" src/lib.h src/lib.cpp)
+add_executable(day12 "day12/solve.cpp")
 target_link_libraries(day12 GTest::gmock_main)
+target_link_libraries(day12 lib)
 add_test(Day12 day12)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)

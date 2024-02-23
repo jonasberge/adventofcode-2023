@@ -129,7 +129,7 @@ namespace Tests
 
 	std::vector<Record> get_records(std::string const& filename)
 	{
-		auto input = read_file("./src/day12/input/" + filename + ".txt");
+		auto input = read_file("./day12/input/" + filename + ".txt");
 		return parse_input(input);
 	}
 

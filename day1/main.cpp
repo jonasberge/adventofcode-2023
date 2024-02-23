@@ -9,9 +9,9 @@ int main()
 {
 	Solution1 s1;
 
-	auto d1 = read_lines("./src/day1/input/input.txt");
-	auto e1 = read_lines("./src/day1/input/example1.txt");
-	auto e2 = read_lines("./src/day1/input/example2.txt");
+	auto d1 = read_lines("./day1/input/input.txt");
+	auto e1 = read_lines("./day1/input/example1.txt");
+	auto e2 = read_lines("./day1/input/example2.txt");
 
 	std::cout << "part1/example1: " << s1.handle_lines(e1) << std::endl;
 	std::cout << "part1: " << s1.handle_lines(d1) << std::endl;

@@ -168,7 +168,7 @@ namespace Tests
 
 	Image get_image(std::string const& filename)
 	{
-		auto input = read_file("./src/day11/input/" + filename + ".txt");
+		auto input = read_file("./day11/input/" + filename + ".txt");
 		auto image = parse_input(input);
 		return image;
 	}

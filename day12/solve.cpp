@@ -245,7 +245,7 @@ namespace Tests
 	}
 
 	TEST(Solve, Example1) {
-		auto lines = read_lines("./src/day12/input/p1e1.txt");
+		auto lines = read_lines("./day12/input/p1e1.txt");
 		EXPECT_EQ(1, solve(parse_line(lines[0])));
 		EXPECT_EQ(4, solve(parse_line(lines[1])));
 		EXPECT_EQ(1, solve(parse_line(lines[2])));
@@ -270,7 +270,7 @@ namespace Tests
 		// attempt 2: 9232, too high => fixed with LastSequenceItemMayNotExceedLastDamagedSpring
 		// attempt 3: 7857
 
-		auto lines = read_lines("./src/day12/input/in.txt");
+		auto lines = read_lines("./day12/input/in.txt");
 		EXPECT_EQ(7857, solve(parse_lines(lines)));
 	}
 
@@ -281,7 +281,7 @@ namespace Tests
 	}
 
 	TEST(Solve, Part2Example1) {
-		auto lines = read_lines("./src/day12/input/p1e1.txt");
+		auto lines = read_lines("./day12/input/p1e1.txt");
 		EXPECT_EQ(1, solve(parse_line(lines[0]).unfolded()));
 		EXPECT_EQ(16384, solve(parse_line(lines[1]).unfolded()));
 		EXPECT_EQ(1, solve(parse_line(lines[2]).unfolded()));
@@ -296,7 +296,7 @@ namespace Tests
 		// attempt 2: 28606137449920, dynamic programming,
 		// especially effective since there are 5 identical copies of everything
 
-		auto lines = read_lines("./src/day12/input/in.txt");
+		auto lines = read_lines("./day12/input/in.txt");
 		EXPECT_EQ(28606137449920, solve(unfolded(parse_lines(lines))));
 	}
 }

@@ -59,7 +59,7 @@ namespace day2
 
 	std::vector<Game> read_games(std::string const& filename)
 	{
-		auto lines = read_lines("./src/day2/input/" + filename + ".txt");
+		auto lines = read_lines("./day2/input/" + filename + ".txt");
 		return parse_lines(lines);
 	}
 
