@@ -24,9 +24,9 @@ namespace day5
 	class InputTests : public testing::Test
 	{
 	protected:
-		std::vector<std::string> example1_lines = read_lines("./day5/input/example1.txt");
-		std::vector<std::string> example2_lines = read_lines("./day5/input/example2.txt");
-		std::vector<std::string> input_lines = read_lines("./day5/input/input.txt");
+		std::vector<std::string> example1_lines = read_lines("./day05/input/example1.txt");
+		std::vector<std::string> example2_lines = read_lines("./day05/input/example2.txt");
+		std::vector<std::string> input_lines = read_lines("./day05/input/input.txt");
 
 		Almanac example1{
 			.seeds = { 79, 14, 55, 13 },

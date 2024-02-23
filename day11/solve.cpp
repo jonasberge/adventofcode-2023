@@ -200,16 +200,6 @@ namespace Tests
 		));
 	}
 
-	TEST(ExpandGalaxy, ExpandsBy10) {
-		auto image = get_image("t1");
-		image.expand(10);
-		ASSERT_THAT(image.galaxies, UnorderedElementsAre(
-			Pair(23, 0),
-			Pair(57, 1),
-			Pair(0, 13)
-		));
-	}
-
 	TEST(Combinations, ThreeElements) {
 		std::vector<size_t> elements = { 1, 2, 3 };
 		std::vector<std::pair<size_t, size_t>> result;

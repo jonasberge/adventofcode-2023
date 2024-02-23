@@ -56,23 +56,23 @@ namespace day7
 		EXPECT_EQ(HandType::FiveOfAKind, parse_hand("?????").hand_type());
 	}
 	TEST(Solution, Example1) {
-		auto lines = read_lines("./day7/input/example1.txt");
+		auto lines = read_lines("./day07/input/example1.txt");
 		Input input{ .bids = parse_lines(lines) };
 		EXPECT_EQ(6440, input.solve());
 	}
 	TEST(Solution, Example1Part2) {
-		auto lines = read_lines("./day7/input/example1.txt");
+		auto lines = read_lines("./day07/input/example1.txt");
 		Input input{ .bids = parse_lines(lines) };
 		input.apply_jokers();
 		EXPECT_EQ(5905, input.solve());
 	}
 	TEST(Solution, Input) {
-		auto lines = read_lines("./day7/input/input.txt");
+		auto lines = read_lines("./day07/input/input.txt");
 		Input input{ .bids = parse_lines(lines) };
 		EXPECT_EQ(246409899, input.solve());
 	}
 	TEST(Solution, InputPart2) {
-		auto lines = read_lines("./day7/input/input.txt");
+		auto lines = read_lines("./day07/input/input.txt");
 		Input input{ .bids = parse_lines(lines) };
 		input.apply_jokers();
 		auto hand_type = input.bids[93].hand.hand_type();

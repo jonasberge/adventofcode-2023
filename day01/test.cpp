@@ -41,10 +41,10 @@ namespace day1
 		EXPECT_EQ(11 + 12 + 33 + 10 + 9 + 0, s.handle_lines({ "1", "1aa2", "aaa3cc", "10", "09", "0000000" }));
 	}
 	TEST_F(Tests, SolutionPart1) {
-		EXPECT_EQ(55002, s.handle_lines(read_lines("./day1/input/input.txt")));
+		EXPECT_EQ(55002, s.handle_lines(read_lines("./day01/input/input.txt")));
 	}
 	TEST_F(Tests, SolutionPart1Example1) {
-		EXPECT_EQ(142, s.handle_lines(read_lines("./day1/input/example1.txt")));
+		EXPECT_EQ(142, s.handle_lines(read_lines("./day01/input/example1.txt")));
 	}
 
 	// part 2
@@ -66,9 +66,9 @@ namespace day1
 		EXPECT_EQ("79", s.transform_written_numbers("sevenine"));
 	}
 	TEST_F(Tests, SolutionPart2Example2) {
-		EXPECT_EQ(281, s.handle_lines(s.transformed_written_numbers(read_lines("./day1/input/example2.txt"))));
+		EXPECT_EQ(281, s.handle_lines(s.transformed_written_numbers(read_lines("./day01/input/example2.txt"))));
 	}
 	TEST_F(Tests, SolutionPart2) {
-		EXPECT_EQ(55093, s.handle_lines(s.transformed_written_numbers(read_lines("./day1/input/input.txt"))));
+		EXPECT_EQ(55093, s.handle_lines(s.transformed_written_numbers(read_lines("./day01/input/input.txt"))));
 	}
 }

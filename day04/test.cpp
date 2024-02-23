@@ -42,7 +42,7 @@ namespace day4
 	// TODO: generalize this?
 	std::vector<Card> read_cards(std::string const& filename)
 	{
-		return parse_lines(read_lines("./day4/input/" + filename + ".txt"));
+		return parse_lines(read_lines("./day04/input/" + filename + ".txt"));
 	}
 
 	class InputTests : public testing::Test

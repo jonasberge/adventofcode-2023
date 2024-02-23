@@ -14,7 +14,7 @@ namespace day3
 	class Tests : public Test
 	{
 	protected:
-		std::vector<std::string> schematic1_text = read_lines("./day3/input/example1.txt");
+		std::vector<std::string> schematic1_text = read_lines("./day03/input/example1.txt");
 		Schematic schematic1 = {
 			.width = 10,
 			.height = 10,
@@ -75,7 +75,7 @@ namespace day3
 	// TODO: generalize this?
 	Schematic read_schematic(std::string const& filename)
 	{
-		auto lines = read_lines("./day3/input/" + filename + ".txt");
+		auto lines = read_lines("./day03/input/" + filename + ".txt");
 		return parse_lines(lines);
 	}
 

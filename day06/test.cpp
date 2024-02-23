@@ -20,25 +20,25 @@ namespace day6
 	}
 
 	TEST(Solution, Example1) {
-		auto lines = read_lines("./day6/input/example1.txt");
+		auto lines = read_lines("./day06/input/example1.txt");
 		auto races = parse_lines(lines);
 		Input input{ .races = races };
 		EXPECT_EQ(288, input.solve());
 	}
 	TEST(Solution, Example2) {
-		auto lines = read_lines("./day6/input/example2.txt");
+		auto lines = read_lines("./day06/input/example2.txt");
 		auto races = parse_lines(lines);
 		Input input{ .races = races };
 		EXPECT_EQ(71503, input.solve());
 	}
 	TEST(Solution, Input) {
-		auto lines = read_lines("./day6/input/input.txt");
+		auto lines = read_lines("./day06/input/input.txt");
 		auto races = parse_lines(lines);
 		Input input{ .races = races };
 		EXPECT_EQ(293046, input.solve());
 	}
 	TEST(Solution, Input2) {
-		auto lines = read_lines("./day6/input/input2.txt");
+		auto lines = read_lines("./day06/input/input2.txt");
 		auto races = parse_lines(lines);
 		Input input{ .races = races };
 		EXPECT_EQ(35150181, input.solve());
