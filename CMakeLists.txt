@@ -81,6 +81,11 @@ target_link_libraries(day12 GTest::gmock_main)
 target_link_libraries(day12 lib)
 add_test(Day12 day12)
 
+add_executable(day13 "day13/solve.cpp")
+target_link_libraries(day13 GTest::gmock_main)
+target_link_libraries(day13 lib)
+add_test(Day13 day13)
+
 if (CMAKE_VERSION VERSION_GREATER 3.12)
     set_property(TARGET solutions PROPERTY CXX_STANDARD 20)
     set_property(TARGET day1 PROPERTY CXX_STANDARD 20)

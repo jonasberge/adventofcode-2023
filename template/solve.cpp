@@ -44,7 +44,7 @@ Input parse_line(std::string const& line)
 
 std::vector<Input> parse_lines(std::vector<std::string> const& lines)
 {
-	std::vector<Record> result;
+	std::vector<Input> result;
 	result.reserve(lines.size());
 	for (auto const& line : lines) {
 		result.push_back(parse_line(line));
@@ -68,10 +68,9 @@ namespace Tests
 	using namespace testing;
 
 	TEST(ParseLine, Parses) {
-		auto r = parse_line("?###???????? 3,2,1");
-		EXPECT_EQ(r.pattern, "?###????????");
-		EXPECT_THAT(r.sequence, ElementsAre(3, 2, 1));
+		auto in = parse_line("");
+
 	}
 
-	
+
 }
