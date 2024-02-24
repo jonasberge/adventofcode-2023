@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <functional>
 #include <iostream>
+#include <optional>
 #include <regex>
 #include <sstream>
 #include <string>
